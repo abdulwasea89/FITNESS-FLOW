@@ -23,7 +23,7 @@ const services: Service[] = [
         title: 'Basic Yoga',
         description:
             'In this class, postures are practiced to align, strengthen and promote flexibility in the body. Breathing techniques and meditation are also integrated. You can expect an emphasis on simplicity, repetition, and ease of movement.',
-        imageSrc: '/images/basic-yoga.jpg',
+        imageSrc: '/851e55691d1b5a305b044d74a91efcbb.jpg',
         link: '/services/basic-yoga',
     },
     {
@@ -31,7 +31,7 @@ const services: Service[] = [
         title: 'Muscle Building',
         description:
             'Definitions of muscle building: exercise that builds muscles through tension. Synonyms: anabolic exercise, bodybuilding, musculaturebuilding.',
-        imageSrc: '/images/muscle-building.jpg',
+        imageSrc: '/851e55691d1b5a305b044d74a91efcbb.jpg',
         link: '/services/muscle-building',
     },
     {
@@ -39,7 +39,7 @@ const services: Service[] = [
         title: 'Beginner Pilates',
         description:
             'Pilates is a system of exercise and movement that is designed to increase strength, flexibility, and balance. It integrates breath and movement within proper body mechanics to increase awareness.',
-        imageSrc: '/images/beginner-pilates.jpg',
+        imageSrc: '/851e55691d1b5a305b044d74a91efcbb.jpg',
         link: '/services/beginner-pilates',
     },
 ];
@@ -56,7 +56,7 @@ const Services: React.FC = () => {
                     regarding diet and health so the individual can make healthy food
                     choices from an increasingly complex food supply.
                 </p>
-                      <div className="grid grid-cols-[repeat(auto-fit,minmax(230px,1fr))] gap-6">
+                      <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4">
 
                     {services.map((service) => (
                         <div
