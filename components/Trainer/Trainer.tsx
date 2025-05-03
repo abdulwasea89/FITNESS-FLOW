@@ -235,16 +235,6 @@ const TrainerSection: React.FC = () => {
                   </section>
                 </div>
 
-                {/* Right side: image */}
-                <div className="w-full lg:w-[300px] h-[300px] border border-gray-500 rounded-xl overflow-hidden">
-                  <Image
-                    src={selectedTrainer.imageSrc}
-                    alt={`${selectedTrainer.name} profile`}
-                    width={300}
-                    height={300}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
               </div>
             </div>
 
