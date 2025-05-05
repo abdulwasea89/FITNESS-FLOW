@@ -34,7 +34,7 @@ const services: Service[] = [
         imageSrc: '/Muay_Thai_Fight_Us_Vs_Burma_(80668065).jpeg',
         link: '/services/muscle-building',
     },
-    {
+    { 
         id: 4,
         title: 'Kickboxing ',
         description:
