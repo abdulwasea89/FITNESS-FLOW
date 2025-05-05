@@ -1,10 +1,13 @@
 "use client";
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+
+import React from "react";
+import Image from "next/image";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+  FaLinkedinIn,
+} from "react-icons/fa";
 import {
   Drawer,
   DrawerContent,
@@ -13,244 +16,234 @@ import {
   DrawerDescription,
   DrawerClose,
   DrawerOverlay,
-} from '@/components/ui/drawer';
+} from "@/components/ui/drawer";
 
-interface Trainer {
-  id: number;
+interface Coach {
   name: string;
-  role: string;
-  imageSrc: string;
+  title: string;
+  imgSrc: string;
+  socials: {
+    icon: React.ReactNode;
+    href: string;
+  }[];
   age: number;
   yearsOfExperience: number;
-  bio: string;
+  bio: string[];
   certifications: string[];
+  experience?: string[];
+  achievements?: string[]
 }
 
-const trainers: Trainer[] = [
+const coaches: Coach[] = [
   {
-    id: 1,
-    name: 'Ivan',
-    role: 'Strength training expert',
-    imageSrc: '/Brurcelee.png',
-    age: 32,
-    yearsOfExperience: 10,
-    bio: 'Ivan specializes in compound movements and functional strength training, helping clients build power and resilience.',
-    certifications: ['CSCS', 'Nutrition Coach'],
-  },
-  {
-    id: 2,
-    name: 'Hanna',
-    role: 'Yoga trainer',
-    imageSrc: '/Brurcelee.png',
-    age: 28,
-    yearsOfExperience: 6,
-    bio: 'Hanna brings mindfulness and flexibility to every session, focusing on breath work and alignment.',
-    certifications: ['RYT-200', 'Prenatal Yoga'],
-  },
+    name: "Shariq Nazir",
+    title:
+      "International Boxing Coach, S.K Boxing Promotion | Affiliated with Pakistan Boxing Council",
+    imgSrc: "/gal/5.jpg",
+    socials: [
+      { icon: <FaFacebookF />, href: "#" },
+      { icon: <FaInstagram />, href: "#" },
+      { icon: <FaTwitter />, href: "#" },
+    ],
+    age: 35,
+    yearsOfExperience: 24,
+    bio: [
+      "International Boxing Coach – S.K Boxing Promotion, affiliated with Pakistan Boxing Council",
+      "Won 3 Asian Championships in Thailand as International Boxing Coach (Jul–Aug 2022)",
+      "Head Coach of Fitness Flow – Boxing & Martial Arts Club",
+    ],
+    certifications: [
+      "Diploma in Physical Education - Coaching Style and Technique",
+      "Black Belt 3rd Dan Taekwondo – World Taekwondo Federation Koki Won, Korea",
+      "Black Sash Wushu Kung Fu (Chinese Kick Boxing, China)",
+      "Boxing Coaching and Cut Man Course – Pakistan Professional Boxing Federation",
+      "Emergency First Aid & Sports Injuries – Integrated Health Service",
+      "Brazilian Jujitsu 3-Day Training Camp – Supervised by PAK MMA",
+      "Close Protection Training – Supported by Wackenhut.pl, WPPL & Security and Management Services",
+      "5th Level Chief Instructor of TDS – Dragon Society of Pakistan",
+      "Affiliated with Pakistan Wushu (Kung Fu) Federation",
+    ],
+    achievements: [
+      "68th Punjab Olympics 1999 (Lahore) – Silver Medal in Wushu (Kick Boxing)",
+      "10th South Asian Games – Participated as TDS Club Chief Instructor (Reg#0128), Srilanka 2006",
+      "6th National Wushu Championship (Lahore) – Gold Medal",
+      "7th National Wushu Championship (Lahore) – Silver Medal",
+      "8th National Wushu Championship – Bronze Medal",
+      "Wushu Official Technical Referee/Judges & Coaching Course – Passed on 5th March 2006",
+      "3rd TDS Top 10 Kung Fu Championship – Chief Referee",
+      "Islamabad Convent School H-8/4 – Ranked 6th among Top 15 Teachers (2014–2015)",
+      "Junior National Badminton Championship 2005 – Team Coach",
+      "Islamabad Convent School H-8/4 – Value Award for 'Most Devoted', April 3, 2015",
+      "Islamabad Dashers Marathon Relay 2015 – Team 3rd Position",
+      "Gold Medal – Kick Boxing (Pakistan Wushu Federation)",
+      "Gold Medal – Taekwondo (Islamabad Taekwondo Federation, 2000)",
+    ],
+    experience: [
+      "Physical Education Coordinator (2000 – Present), Islamabad Convent School, H-8/4 Campus",
+      "Responsible for developing physical fitness, coordination, and mental focus programs for students",
+    ],
+  }
+
 ];
 
-const NextArrow = (props: any) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} text-white`}
-      style={{ ...style, zIndex: 10 }}
-      onClick={onClick}
-    />
+const ExpertCoaches: React.FC = () => {
+  const [selectedTrainer, setSelectedTrainer] = React.useState<Coach | null>(
+    null
   );
-};
-
-const PrevArrow = (props: any) => {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={`${className} text-white`}
-      style={{ ...style, zIndex: 10 }}
-      onClick={onClick}
-    />
-  );
-};
-
-const TrainerSection: React.FC = () => {
-  const [openId, setOpenId] = useState<number | null>(null);
-  const selectedTrainer = trainers.find((t) => t.id === openId);
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    responsive: [{ breakpoint: 640, settings: { slidesToShow: 1 } }],
-    arrows: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-  };
 
   return (
-    <section id="trainer-section" className="bg-black text-white py-16">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          {/* Intro */}
-          <div className="space-y-4">
-            <h2 className="text-3xl lg:text-4xl font-bold uppercase">
-              Our certified trainers will help you achieve your goals.
-            </h2>
-            <p className="text-gray-300">
-              Click on a trainer to view their full profile, including biography,
-              certifications, and stats. Get to know the expert behind your
-              training plan.
-            </p>
-            <Link
-              href="/coaches"
-              className="inline-flex items-center text-yellow-400 font-medium hover:underline"
-            >
-              View All Coaches
-              <svg
-                className="ml-2 w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
+    <>
+      <section className=" text-white py-16  px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="flex items-center justify-center text-yellow-400 uppercase tracking-widest mb-2 gap-3">
+            <span className="block w-16 h-px bg-yellow-400" />
+            Our Team
+            <span className="block w-16 h-px bg-yellow-400" />
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-8 relative inline-block">
+            Expert Coaches
+          </h2>
+          <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {coaches.map((coach) => (
+              <div
+                key={coach.name}
+                className="group relative overflow-hidden cursor-pointer "
+                onClick={() => setSelectedTrainer(coach)}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                <div
+                  className="w-full h-72 sm:h-72 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${coach.imgSrc})` }}
                 />
-              </svg>
-            </Link>
-          </div>
-
-          {/* Carousel */}
-          <div className="w-full">
-            <Slider {...settings} className="relative">
-              {trainers.map((trainer) => (
-                <div key={trainer.id} className="px-2">
-                  <div
-                    className="bg-black rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition border border-gray-950"
-                    onClick={() => setOpenId(trainer.id)}
-                  >
-                    <div className="relative h-64 w-full">
-                      <Image
-                        src={trainer.imageSrc}
-                        alt={trainer.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 300px"
-                        className="object-cover object-center"
-                      />
-                    </div>
-                    <div className="p-4 relative bg-black/70 -mt-16">
-                      <h3 className="text-lg font-bold uppercase text-center text-white">
-                        {trainer.name}
-                      </h3>
-                      <p className="text-gray-400 text-sm text-center">
-                        {trainer.role}
-                      </p>
-                    </div>
-                  </div>
+                <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black to-transparent opacity-90" />
+                <div className="absolute top-6 left-4 flex flex-col items-start space-y-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {coach.socials.map((social, idx) => (
+                    <a
+                      key={idx}
+                      href={social.href}
+                      className="text-white text-lg p-2 bg-[#FF9900] rounded-full hover:bg-[#ff7700] transition"
+                      aria-label="Social Link"
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
                 </div>
-              ))}
-            </Slider>
-          </div>
-        </div>
-      </div>
-
-      {/* Drawer */}
-      {selectedTrainer && (
-        <Drawer open={!!selectedTrainer} modal onOpenChange={() => setOpenId(null)}>
-          <DrawerOverlay className="fixed inset-0 z-40" />
-          <DrawerContent className="fixed inset-8 z-50 rounded-2xl bg-black text-white shadow-2xl overflow-hidden border border-gray-700">
-            <DrawerHeader className="relative h-52 p-0">
-              <Image
-                src={selectedTrainer.imageSrc}
-                alt={`${selectedTrainer.name} header`}
-                fill
-                className="object-cover opacity-30"
-              />
-              <div className="absolute inset-0 bg-black z-10 flex items-center px-8">
-                <div>
-                  <DrawerTitle className="text-4xl font-bold">
-                    {selectedTrainer.name}
-                  </DrawerTitle>
-                  <DrawerDescription className="text-yellow-400 text-lg">
-                    {selectedTrainer.role}
-                  </DrawerDescription>
+                <div className="relative p-4 text-center z-20 ">
+                  <h3 className="text-xl font-semibold mb-1">{coach.name}</h3>
+                  <p className="text-gray-400 text-sm">{coach.title}</p>
                 </div>
               </div>
-              <DrawerClose
-                aria-label="Close trainer details"
-                className="absolute top-4 right-4 text-3xl text-white hover:text-yellow-400 z-20 transition"
-              >
-                ×
-              </DrawerClose>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {selectedTrainer && (
+        <Drawer
+          open={!!selectedTrainer}
+          modal
+          onOpenChange={() => setSelectedTrainer(null)}
+        >
+          <DrawerOverlay className="fixed inset-0 z-40" />
+          <DrawerContent className="fixed inset-8 z-50 rounded-2xl bg-[#0D0D0D] text-white shadow-2xl overflow-hidden border border-gray-700">
+
+            {/* Header with circular image */}
+            <DrawerHeader className="relative h-52 p-0 flex items-center justify-center flex-col gap-2 rounded-t-2xl">
+              <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-yellow-400 shadow-md">
+                <Image
+                  src={selectedTrainer.imgSrc}
+                  alt={`${selectedTrainer.name} avatar`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="z-10 text-center px-4">
+                <DrawerTitle className="text-2xl font-bold">
+                  {selectedTrainer.name}
+                </DrawerTitle>
+                <DrawerDescription className="text-yellow-400 text-sm">
+                  {selectedTrainer.title}
+                </DrawerDescription>
+              </div>
             </DrawerHeader>
 
-            {/* Body: Split layout with image on right */}
-            <div className="flex-1 overflow-y-auto p-8">
-              <div className="flex flex-col lg:flex-row gap-8">
-                {/* Left side: details */}
-                <div className="flex-1 space-y-6">
-                  <div className="flex gap-7 text-left">
+            {/* Drawer body */}
+            <div className="flex-1 overflow-y-auto p-6">
+              <div className="flex flex-col lg:flex-row gap-6">
+                <div className="flex-1 space-y-4">
+                  <div className="flex gap-6 text-left text-sm text-gray-300">
                     <div>
-                      <p className="text-3xl font-bold">{selectedTrainer.age}</p>
-                      <p className="mt-1 uppercase text-xs text-gray-400">Age</p>
+                      <strong>Age:</strong> {selectedTrainer.age}
                     </div>
                     <div>
-                      <p className="text-3xl font-bold">{selectedTrainer.yearsOfExperience}</p>
-                      <p className="mt-1 uppercase text-xs text-gray-400">Experience</p>
+                      <strong>Experience:</strong> {selectedTrainer.yearsOfExperience} years
                     </div>
                   </div>
 
                   <section aria-labelledby="bio-heading">
-                    <h4
-                      id="bio-heading"
-                      className="uppercase text-sm font-semibold tracking-wide mb-2"
-                    >
+                    <h4 id="bio-heading" className="uppercase text-xs font-semibold tracking-wide mb-1">
                       Biography
                     </h4>
-                    <p className="leading-relaxed italic text-gray-300">
-                      {selectedTrainer.bio}
+                    <p className="leading-relaxed italic text-gray-300 text-sm">
+                      {selectedTrainer.bio.join(' ')}
                     </p>
                   </section>
 
                   <section aria-labelledby="certs-heading">
-                    <h4
-                      id="certs-heading"
-                      className="uppercase text-sm font-semibold tracking-wide mb-2"
-                    >
+                    <h4 id="certs-heading" className="uppercase text-xs font-semibold tracking-wide mb-1">
                       Certifications
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {selectedTrainer.certifications.map((cert, idx) => (
-                        <span
-                          key={idx}
-                          className="rounded-full px-3 py-1 text-xs font-medium text-yellow-400 border border-yellow-400"
-                        >
+                        <span key={idx} className="rounded-full px-2 py-0.5 text-[10px] font-medium text-yellow-400 border border-yellow-400">
                           {cert}
                         </span>
                       ))}
                     </div>
                   </section>
-                </div>
 
+                  {/* Add Achievements Section */}
+                  <section aria-labelledby="achievements-heading">
+                    <h4 id="achievements-heading" className="uppercase text-xs font-semibold tracking-wide mb-1">
+                      Achievements
+                    </h4>
+                    <ul className="list-inside list-disc text-gray-300 text-sm">
+                      {selectedTrainer.achievements?.map((achieve, idx) => (
+                        <li key={idx}>{achieve}</li>
+                      ))}
+                    </ul>
+                  </section>
+
+                  {/* Add Experience Section */}
+                  <section aria-labelledby="experience-heading">
+                    <h4 id="experience-heading" className="uppercase text-xs font-semibold tracking-wide mb-1">
+                      Experience
+                    </h4>
+                    <ul className="list-inside list-disc text-gray-300 text-sm">
+                      {selectedTrainer.experience?.map((exp, idx) => (
+                        <li key={idx}>{exp}</li>
+                      ))}
+                    </ul>
+                  </section>
+                </div>
               </div>
             </div>
 
-            <footer className="p-6 border-t border-gray-800">
+            {/* Drawer footer */}
+            <footer className="p-4 border-t border-gray-800">
               <button
-                className="w-full rounded-full text-yellow-400 hover:bg-yellow-300 hover:border-none hover:text-black py-3 text-sm font-semibold border border-red-700 transition uppercase"
-                onClick={() => console.log('Hire', selectedTrainer.name)}
+                className="w-full rounded-full text-yellow-400 hover:bg-yellow-300 hover:text-black py-2 text-xs font-semibold uppercase transition"
+                onClick={() => console.log("Hire", selectedTrainer.name)}
               >
                 Hire This Trainer
               </button>
             </footer>
           </DrawerContent>
         </Drawer>
+
       )}
-    </section>
+    </>
   );
 };
 
-export default TrainerSection;
+export default ExpertCoaches;

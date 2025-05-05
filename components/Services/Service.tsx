@@ -12,42 +12,47 @@ interface Service {
 const services: Service[] = [
     {
         id: 1,
-        title: 'Cardio Strength',
+        title: 'Boxing',
         description:
             'The Cardio/Strength classes aim to improve cardiovascular health, muscular strength, and endurance. These classes utilize a variety of equipment to help keep your fitness routine fun and fresh.',
-        imageSrc: '/851e55691d1b5a305b044d74a91efcbb.jpg',
+        imageSrc: '/360_F_163798969_qrlYJT24qCW5Wusbvbid7W6AMcPBsxFZ.jpg',
         link: '/services/cardio-strength',
     },
     {
         id: 2,
-        title: 'Basic Yoga',
+        title: 'Taekwondo',
         description:
             'In this class, postures are practiced to align, strengthen and promote flexibility in the body. Breathing techniques and meditation are also integrated. You can expect an emphasis on simplicity, repetition, and ease of movement.',
-        imageSrc: '/851e55691d1b5a305b044d74a91efcbb.jpg',
+        imageSrc: '/20241004184648_Day_4_W-49kg_F_1.png',
         link: '/services/basic-yoga',
     },
     {
         id: 3,
-        title: 'Muscle Building',
+        title: 'muay thai',
         description:
             'Definitions of muscle building: exercise that builds muscles through tension. Synonyms: anabolic exercise, bodybuilding, musculaturebuilding.',
-        imageSrc: '/851e55691d1b5a305b044d74a91efcbb.jpg',
+        imageSrc: '/Muay_Thai_Fight_Us_Vs_Burma_(80668065).jpeg',
         link: '/services/muscle-building',
     },
     {
         id: 4,
-        title: 'Beginner Pilates',
+        title: 'Kickboxing ',
         description:
             'Pilates is a system of exercise and movement that is designed to increase strength, flexibility, and balance. It integrates breath and movement within proper body mechanics to increase awareness.',
-        imageSrc: '/851e55691d1b5a305b044d74a91efcbb.jpg',
+        imageSrc: '/image222.png',
         link: '/services/beginner-pilates',
     },
 ];
 
 const Services: React.FC = () => {
     return (
-        <section id="services" className="bg-black text-white py-16">
+        <section id="services" className=" text-white py-16">
             <div className="container mx-auto px-4">
+                <p className="flex items-center justify-center text-yellow-400 uppercase tracking-widest mb-2 gap-3">
+                    <span className="block w-16 h-px bg-yellow-400" />
+                    Our Services
+                    <span className="block w-16 h-px bg-yellow-400" />
+                </p>
                 <h2 className="text-4xl font-bold text-center uppercase mb-4">
                     Our Services
                 </h2>

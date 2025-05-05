@@ -1,122 +1,110 @@
 "use client";
-import { useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 
+const images = [
+  "/gal/1.jpg",
+  "/gal/2.jpg",
+  "/gal/3.jpg",
+  "/gal/4.jpg",
+];
+
 const GallerySection = () => {
-  const mobileImages = [
-    "/851e55691d1b5a305b044d74a91efcbb.jpg",
-    "/851e55691d1b5a305b044d74a91efcbb.jpg",
-    "/851e55691d1b5a305b044d74a91efcbb.jpg",
-    "/851e55691d1b5a305b044d74a91efcbb.jpg",
-  ];
-
-  const desktopImages = [
-    "/851e55691d1b5a305b044d74a91efcbb.jpg",
-    "/851e55691d1b5a305b044d74a91efcbb.jpg",
-    "/851e55691d1b5a305b044d74a91efcbb.jpg",
-    "/851e55691d1b5a305b044d74a91efcbb.jpg",
-  ];
-
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Improved autoplay with proper cleanup
+  const scrollTo = useCallback(
+    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    [emblaApi]
+  );
+
+  // Auto-slide effect
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % mobileImages.length);
+    if (!emblaApi) return;
+
+    const autoplay = setInterval(() => {
+      emblaApi.scrollNext();
     }, 5000);
-    return () => clearInterval(interval);
-  }, [mobileImages.length]);
+
+    emblaApi.on("select", () => setCurrentIndex(emblaApi.selectedScrollSnap()));
+    return () => clearInterval(autoplay);
+  }, [emblaApi]);
 
   return (
-    <section className="py-12 md:py-16 px-4 md:px-6 lg:px-8">
+    <section className="py-12 md:py-16 px-4 md:px-6 lg:px-8 bg-black text-white">
+      <p className="flex items-center justify-center text-yellow-400 uppercase tracking-widest mb-2 gap-3">
+        <span className="block w-16 h-px bg-yellow-400" />
+        Gallery
+        <span className="block w-16 h-px bg-yellow-400" />
+      </p>
       {/* Header */}
       <div className="flex flex-col md:flex-row items-center justify-between mb-6 md:mb-8 gap-2">
         <h2 className="text-3xl md:text-4xl font-semibold text-center md:text-left">Gallery</h2>
-        <Link
-          href="/gallery"
-          className="inline-flex items-center text-yellow-400 font-medium hover:underline"
-        >
+        <Link href="/gallery" className="inline-flex items-center text-yellow-400 font-medium hover:underline">
           Learn More
-          <svg
-            className="ml-2 w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
+          <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </Link>
       </div>
 
-      {/* Mobile Carousel with 3:4 aspect ratio */}
-      <div className="relative h-[250px] overflow-hidden mb-6 md:hidden touch-action-none">
-        <div
-          className="flex h-full transition-transform duration-500 ease-in-out will-change-transform"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-            width: `${mobileImages.length * 100}%`
-          }}
-        >
-          {mobileImages.map((image: string, index: number) => (
-            <div key={index} className="w-full h-full relative flex-shrink-0 aspect-[3/4]">
+      {/* Mobile Embla Carousel */}
+      <div className="md:hidden overflow-hidden rounded-lg" ref={emblaRef}>
+        <div className="flex">
+          {images.map((img, idx) => (
+            <div key={idx} className="flex-[0_0_100%] h-[300px]">
               <img
-                src={image}
-                alt={`slide-${index}`}
+                src={img}
+                alt={`carousel-${idx}`}
                 className="w-full h-full object-cover cursor-pointer"
-                onClick={() => setSelectedImage(image)}
+                onClick={() => setSelectedImage(img)}
               />
             </div>
           ))}
         </div>
-
-        {/* Improved Dots */}
-        <div className="absolute bottom-4 w-full flex justify-center gap-2">
-          {mobileImages.map((_: string, index: number) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                currentIndex === index
-                  ? "bg-black scale-125"
-                  : "bg-black/50 scale-100"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
       </div>
 
-      {/* Desktop Grid with 1:1 aspect ratio */}
-      <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-2">
-        {desktopImages.map((image: string, index: number) => (
-          <div key={index} className="relative group aspect-square h-auto overflow-hidden ">
+      {/* Carousel Dots */}
+      <div className="md:hidden flex justify-center gap-2 mt-4">
+        {images.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => scrollTo(idx)}
+            className={`w-2 h-2 rounded-full transition ${currentIndex === idx ? "bg-yellow-200" : "bg-white/30"
+              }`}
+          />
+        ))}
+      </div>
+
+      {/* Desktop Grid */}
+      <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        {images.map((img, idx) => (
+          <div
+            key={idx}
+            className="aspect-square overflow-hidden  bg-neutral-900 flex items-center justify-center"
+          >
             <img
-              src={image}
-              alt={`gallery-image-${index}`}
-              className="w-full h-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
-              onClick={() => setSelectedImage(image)}
+              src={img}
+              alt={`gallery-${idx}`}
+              className="w-full h-full object-cover cursor-pointer transition-transform duration-300 hover:scale-105"
+              onClick={() => setSelectedImage(img)}
             />
           </div>
         ))}
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox Preview */}
       {selectedImage && (
         <div
-          className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+          className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50"
           onClick={() => setSelectedImage(null)}
         >
           <img
             src={selectedImage}
-            alt="selected"
-            className="max-h-[90vh] max-w-[90vw] w-auto h-auto object-contain rounded-lg shadow-xl"
+            alt="preview"
+            className="max-w-[90vw] max-h-[90vh] rounded-lg object-contain"
           />
         </div>
       )}

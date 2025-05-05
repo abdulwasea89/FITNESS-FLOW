@@ -31,7 +31,7 @@ const SplashScreen = ({ onAnimationComplete }: { onAnimationComplete: () => void
 
     return (
         <div
-            className={`fixed inset-0 z-50 bg-black flex items-center justify-center transition-opacity duration-700 ${fadeOut ? "opacity-0" : "opacity-100"
+            className={`fixed inset-0 z-50  flex items-center justify-center transition-opacity duration-700 ${fadeOut ? "opacity-0" : "opacity-100"
                 }`}
         >
             <h1 className="text-4xl md:text-5xl tracking-widest text-white font-medium font-mono whitespace-nowrap">

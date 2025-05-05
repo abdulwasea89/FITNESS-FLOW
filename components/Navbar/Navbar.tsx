@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, ShoppingBag } from 'lucide-react';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,37 +25,22 @@ const Navbar = () => {
 
     return (
         <>
-            <nav
-                className={`fixed top-0 inset-x-0 z-50 h-16 transition-all duration-300
-          ${scrolled && !isMenuOpen
-                        ? 'm-5 md:m-10 md:mx-10    rounded-full backdrop-filter backdrop-blur-lg bg-black bg-opacity-70'
-                        : 'm-0 rounded-none'}
-          ${isMenuOpen ? 'bg-black' : ''}
-        `}
-            >
+            <nav className="fixed top-0 inset-x-0 z-50 h-20 transition-all duration-300 backdrop-filter backdrop-blur-lg bg-black/60">
                 <div className="mx-auto flex items-center justify-between px-6 py-6 md:px-10 h-full">
                     <Link href="#">
                         <div className="text-xl font-bold text-white">FITNESS FLOW</div>
                     </Link>
 
-                    {/* hamburger */}
                     <button
                         className="md:hidden flex flex-col justify-center items-center space-y-1"
                         onClick={toggleMenu}
                         aria-label="Toggle menu"
                     >
-                        <span
-                            className={`h-0.5 w-6 bg-white transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}
-                        />
-                        <span
-                            className={`h-0.5 w-6 bg-white transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}
-                        />
-                        <span
-                            className={`h-0.5 w-6 bg-white transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}
-                        />
+                        <span className={`h-0.5 w-6 bg-white transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
+                        <span className={`h-0.5 w-6 bg-white transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`} />
+                        <span className={`h-0.5 w-6 bg-white transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
                     </button>
 
-                    {/* desktop links */}
                     <div className="hidden md:flex items-center gap-8">
                         {['Home', 'About', 'Services', 'Contact'].map(link => (
                             <a key={link} href="#" className="text-gray-300 hover:text-white transition">
@@ -64,23 +49,20 @@ const Navbar = () => {
                         ))}
                     </div>
 
-                    {/* desktop actions */}
                     <div className="hidden md:flex items-center gap-4">
                         <button className="p-2 rounded-lg text-white">
                             <ShoppingCart className="w-5 h-5" />
                         </button>
-                        <button className="px-4 py-[5px] font-sans font-medium bg-red-600 text-black hover:bg-gray-200 transition rounded-full">
-                            Book a Session
+                        <button className="p-2 rounded-lg text-white">
+                            <ShoppingBag className="w-5 h-5" />
                         </button>
                     </div>
                 </div>
             </nav>
 
-            {/* mobile menu panel */}
             <div
                 className={`fixed inset-x-0 top-20 z-40 bg-black px-6 py-4 flex flex-col space-y-2 transition-all duration-300 ease-in-out overflow-auto
-          ${isMenuOpen ? 'opacity-100 h-[calc(100vh-5rem)] pointer-events-auto' : 'opacity-0 h-0 pointer-events-none'}
-        `}
+                ${isMenuOpen ? 'opacity-100 h-[calc(100vh-5rem)] pointer-events-auto' : 'opacity-0 h-0 pointer-events-none'}`}
             >
                 {['Home', 'About', 'Services', 'Contact'].map(item => (
                     <a

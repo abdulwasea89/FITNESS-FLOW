@@ -3,12 +3,10 @@ import Link from 'next/link';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-10 mt-10 lg:mt-0 ">
+    <section className="relative min-h-screen flex items-center bg-[url('/istockphoto-1006291908-612x612.jpg')] bg-cover bg-center bg-no-repeat">
       <div className="max-w-7xl mx-auto px-6 md:px-16 w-full">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
-
-          {/* Text Content - Now comes first in mobile */}
-          <div className="md:w-1/2 text-center md:text-left space-y-4 md:space-y-6">
+          <div className="md:w-1/2 text-center md:text-left space-y-2 md:space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
               “ Knowing is not enough, we must apply. ”
             </h1>
@@ -16,15 +14,12 @@ const Hero = () => {
               Willing is not enough, we must do.
               <br />— <span className="text-white font-semibold">Bruce Lee</span>
             </p>
-
             <p className="text-base md:text-lg text-gray-200 max-w-xl mx-auto md:mx-0">
-              Start your fitness journey today with our expert trainers and personalized programs. Achieve your goals faster with science-backed workouts and nutrition plans.
+              Start your fitness journey today with our expert trainers and personalized programs.
+              Achieve your goals faster with science-backed workouts and nutrition plans.
             </p>
             <div className="flex justify-center md:justify-start mt-4">
-              <Link
-                href="/gallery"
-                className="inline-flex items-center text-yellow-400 font-medium hover:underline"
-              >
+              <Link href="/gallery" className="inline-flex items-center text-[#00F0FF] font-medium">
                 Learn More
                 <svg
                   className="ml-2 w-4 h-4"
@@ -41,17 +36,6 @@ const Hero = () => {
                   />
                 </svg>
               </Link>
-            </div>
-          </div>
-
-          {/* Image Container - Adjusted for mobile */}
-          <div className="md:w-1/2 w-full max-w-sm mx-auto mt-8 md:mt-0 md:max-w-lg">
-            <div className="relative w-full h-[300px] md:h-[490px] rounded-2xl overflow-hidden">
-              <img
-                src="/851e55691d1b5a305b044d74a91efcbb-removebg-preview.png"
-                alt="Bruce Lee"
-                className="w-full h-full object-cover object-center"
-              />
             </div>
           </div>
         </div>
