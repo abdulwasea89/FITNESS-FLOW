@@ -1,44 +1,106 @@
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+'use client';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const testimonials = [
+    {
+        id: 1,
+        content: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nihil, maxime! Quibusdam neque, similique iusto fuga ad, aliquam eaque rem officia cumque voluptate omnis quasi ea a illum nemo quisquam delectus.`,
+        name: 'Mia Brown',
+        role: 'Marketer',
+        avatar: 'https://images.unsplash.com/photo-1499470932971-a90681ce8530?...',
+    },
+    {
+        id: 2,
+        content: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa cumque quaerat libero enim animi natus maxime fuga at? Eos ab dicta itaque sapiente repellendus consequatur perspiciatis ipsum. Assumenda, excepturi? Minima!`,
+        name: 'Mia Browndsfkj',
+        role: 'Marketer',
+        avatar: 'https://images.unsplash.com/photo-1499470932971-a90681ce8530?...',
+    },
+];
 
 const Testimonials: React.FC = () => {
-    const testimonials = [
-        {
-            quote:
-                "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
-            name: "Sarah Chen",
-            designation: "Product Manager at TechFlow",
-            src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-            quote:
-                "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
-            name: "Michael Rodriguez",
-            designation: "CTO at InnovateSphere",
-            src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-            quote:
-                "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-            name: "Emily Watson",
-            designation: "Operations Director at CloudScale",
-            src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-            quote:
-                "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-            name: "James Kim",
-            designation: "Engineering Lead at DataPro",
-            src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-        {
-            quote:
-                "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-            name: "Lisa Thompson",
-            designation: "VP of Technology at FutureNet",
-            src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        },
-    ];
-    return <AnimatedTestimonials testimonials={testimonials} />;
-}
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-export default Testimonials
+    const prevSlide = () => {
+        setCurrentIndex((prev) =>
+            prev === 0 ? testimonials.length - 1 : prev - 1
+        );
+    };
+
+    const nextSlide = () => {
+        setCurrentIndex((prev) =>
+            prev === testimonials.length - 1 ? 0 : prev + 1
+        );
+    };
+
+    return (
+        <section className="bg-black">
+            <div className="container px-6 py-10 mx-auto">
+                <p className="flex items-center justify-center text-yellow-400 uppercase tracking-widest mb-2 gap-3">
+                    <span className="block w-16 h-px bg-yellow-400" />
+                    Our Clients
+                    <span className="block w-16 h-px bg-yellow-400" />
+                </p>
+                <h2 className="text-4xl font-bold text-center uppercase mb-4 text-white">
+                    Our Clients
+                </h2>
+
+                <div className="flex items-center justify-center gap-6 max-w-4xl mx-auto mt-16">
+                    <button
+                        onClick={prevSlide}
+                        title="Previous"
+                        className="p-2 border border-yellow-400 rounded-full text-yellow-400 hover:bg-yellow-400 hover:text-black"
+                    >
+                        &#8592;
+                    </button>
+
+                    <div className="px-8 py-6 rounded-lg text-center w-full max-w-3xl">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={testimonials[currentIndex].id}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.4 }}
+                            >
+                                <p className="text-white leading-relaxed text-center mb-6">
+                                    {testimonials[currentIndex].content}
+                                </p>
+                                <div className="flex flex-col items-center justify-center">
+                                    <motion.img
+                                        src={testimonials[currentIndex].avatar}
+                                        alt={testimonials[currentIndex].name}
+                                        className="object-cover rounded-full w-14 h-14"
+                                        initial={{ scale: 0.8, opacity: 0 }}
+                                        animate={{ scale: 1, opacity: 1 }}
+                                        exit={{ scale: 0.8, opacity: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                    />
+                                    <div className="mt-4 text-center">
+                                        <h3 className="font-semibold text-white">
+                                            {testimonials[currentIndex].name}
+                                        </h3>
+                                        <span className="text-sm text-white">
+                                            {testimonials[currentIndex].role}
+                                        </span>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
+
+                    <button
+                        onClick={nextSlide}
+                        title="Next"
+                        className="p-2 border border-yellow-400 rounded-full text-yellow-400 hover:bg-yellow-400 hover:text-black"
+                    >
+                        &#8594;
+                    </button>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Testimonials;

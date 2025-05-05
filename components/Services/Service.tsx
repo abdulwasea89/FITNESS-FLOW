@@ -34,7 +34,7 @@ const services: Service[] = [
         imageSrc: '/Muay_Thai_Fight_Us_Vs_Burma_(80668065).jpeg',
         link: '/services/muscle-building',
     },
-    { 
+    {
         id: 4,
         title: 'Kickboxing ',
         description:
@@ -48,19 +48,7 @@ const Services: React.FC = () => {
     return (
         <section id="services" className=" text-white py-16">
             <div className="container mx-auto px-4">
-                <p className="flex items-center justify-center text-yellow-400 uppercase tracking-widest mb-2 gap-3">
-                    <span className="block w-16 h-px bg-yellow-400" />
-                    Our Services
-                    <span className="block w-16 h-px bg-yellow-400" />
-                </p>
-                <h2 className="text-4xl font-bold text-center uppercase mb-4">
-                    Our Services
-                </h2>
-                <p className="text-center max-w-3xl mx-auto mb-12">
-                    To provide adequate knowledge and skills necessary for critical thinking
-                    regarding diet and health so the individual can make healthy food
-                    choices from an increasingly complex food supply.
-                </p>
+               
                       <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4">
 
                     {services.map((service) => (
