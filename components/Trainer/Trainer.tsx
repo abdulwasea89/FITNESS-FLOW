@@ -147,7 +147,7 @@ const ExpertCoaches: React.FC = () => {
           <DrawerContent className="fixed inset-8 z-50 rounded-2xl bg-[#0D0D0D] text-white shadow-2xl overflow-hidden border border-gray-700">
 
             {/* Header with circular image */}
-            <DrawerHeader className="relative h-52 p-0 flex items-center justify-center flex-col gap-2 rounded-t-2xl">
+            <DrawerHeader className="relative h-52 p-0 flex items-center justify-center flex-col gap-2 rounded-t-2xl mt-10">
               <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-yellow-400 shadow-md">
                 <Image
                   src={selectedTrainer.imgSrc}
@@ -161,7 +161,7 @@ const ExpertCoaches: React.FC = () => {
                 <DrawerTitle className="text-2xl font-bold">
                   {selectedTrainer.name}
                 </DrawerTitle>
-                <DrawerDescription className="text-yellow-400 text-sm">
+                <DrawerDescription className="text-yellow-400 text-sm mb-5">
                   {selectedTrainer.title}
                 </DrawerDescription>
               </div>

@@ -61,7 +61,7 @@ const Navbar = () => {
             </nav>
 
             <div
-                className={`fixed inset-x-0 top-20 z-40 bg-black px-6 py-4 flex flex-col space-y-2 transition-all duration-300 ease-in-out overflow-auto
+                className={`fixed inset-x-0 top-20 z-40 backdrop-filter backdrop-blur-lg bg-black/60 px-6 py-4 flex flex-col space-y-4 transition-all duration-300 ease-in-out overflow-auto
                 ${isMenuOpen ? 'opacity-100 h-[calc(100vh-5rem)] pointer-events-auto' : 'opacity-0 h-0 pointer-events-none'}`}
             >
                 {['Home', 'About', 'Services', 'Contact'].map(item => (
@@ -75,13 +75,15 @@ const Navbar = () => {
                     </a>
                 ))}
 
-                <div className="flex flex-col space-y-2 mt-4">
-                    <button className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-lg text-white">
+                <div className="flex flex-col gap-2 pt-4 border-t border-gray-700">
+                    <button className="flex items-center gap-2 text-white">
+                        <span>Cart</span>
                         <ShoppingCart className="w-5 h-5" />
-                        Shop
+
                     </button>
-                    <button className="w-full px-4 py-2 font-sans font-medium bg-red-600 text-black hover:bg-gray-200 transition rounded-full">
-                        Book a Session
+                    <button className="flex items-center gap-2 text-white">
+                        <span>Shop Products</span>
+                        <ShoppingBag className="w-5 h-5" />
                     </button>
                 </div>
             </div>

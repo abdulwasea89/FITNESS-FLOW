@@ -6,8 +6,8 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center bg-[url('/istockphoto-1006291908-612x612.jpg')] bg-cover bg-center bg-no-repeat">
       <div className="max-w-7xl mx-auto px-6 md:px-16 w-full">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
-          <div className="md:w-1/2 text-center md:text-left space-y-2 md:space-y-4">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+          <div className="md:w-1/2 text-center md:text-left space-y-2 md:space-y-3">
+            <h1 className="text-5xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
               “ Knowing is not enough, we must apply. ”
             </h1>
             <p className="text-lg md:text-xl text-gray-200 mt-2 md:mt-4 whitespace-pre-line">
@@ -19,7 +19,7 @@ const Hero = () => {
               Achieve your goals faster with science-backed workouts and nutrition plans.
             </p>
             <div className="flex justify-center md:justify-start mt-4">
-              <Link href="/gallery" className="inline-flex items-center text-[#00F0FF] font-medium">
+              <Link href="/gallery" className="inline-flex items-center text-yellow-400 font-medium ">
                 Learn More
                 <svg
                   className="ml-2 w-4 h-4"
